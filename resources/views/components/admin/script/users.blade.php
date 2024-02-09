@@ -1,65 +1,6 @@
 <script>
-    //Get Data of Posts
-    $(document).ready(function() {
-        $('#myTable').DataTable({
-            serverSide: true,
-            ajax: "{{ route('admin.usersdata') }}",
-            columns: [{
-                    data: 'id',
-                    name: 'id'
-                },
-                {
-                    data: 'name',
-                    name: 'name'
-                },
-                {
-                    data: 'email',
-                    name: 'email'
-                },
-                // {
-                //     data: 'image',
-                //     name: 'image',
-                //     render: function(data, type, full, meta) {
-                //         var imageUrl = "{{ asset('storage/posts') }}/" + data;
 
-                //         if (data) {
-                //             return '<img src="' + imageUrl + '" alt="Image" height="50">';
-                //         } else {
-                //             var defaultImageUrl = "{{ asset('storage/posts/no_image.jpg') }}";
-                //             return '<img src="' + defaultImageUrl +
-                //                 '" alt="Image" height="50">';
-                //         }
-                //     }
-                // },
-                {
-                    data: 'id',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false,
-                    render: function(data, type, full, meta) {
-                        var editUrl = "{{ route('admin.users.edit', ':id') }}".replace(':id',
-                            data);
-                            var viewUrl = "{{ route('admin.users.show', ':id') }}".replace(':id', data);
-                        var deleteUrl = "{{ route('admin.users.destroy', ':id') }}".replace(
-                            ':id', data);
 
-                        return '<a href="#" class="btn btn-primary edit-users-btn" data-id="' +
-                            data +
-                            '"><i class="fas fa-edit"></i></a>&nbsp;' +
-                            '<a href="' + editUrl + '" class="btn btn-primary view-users-btn"><i class="fas fa-eye"></i></a>&nbsp;' +
-                            '<form action="' + deleteUrl +
-                            '" method="post" style="display:inline">' +
-                            '@csrf' +
-                            '@method('DELETE')' +
-                            '<button type="submit" onclick="confirmDelete(event)" ' +
-                            'class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>' +
-                            '</form>';
-
-                    }
-                }
-            ]
-        });
-    });
     //Delete Method fot post
     function confirmDelete(event) {
         event.preventDefault(); // Prevent the form from submitting immediately
@@ -169,4 +110,48 @@
             }
         });
     });
+
+    $(document).ready(function() {
+    $('#myTable').DataTable({
+        serverSide: true,
+        ajax: "{{ route('admin.usersdata') }}",
+        columns: [
+            {
+                data: 'id',
+                name: 'id'
+            },
+            {
+                data: 'name',
+                name: 'name'
+            },
+            {
+                data: 'email',
+                name: 'email'
+            },
+            {
+                data: 'id',
+                name: 'action',
+                orderable: false,
+                searchable: false,
+                render: function(data, type, full, meta) {
+                    var editUrl = "{{ route('admin.users.edit', ':id') }}".replace(':id', data);
+                    var viewUrl = "{{ route('admin.users.show', ':id') }}".replace(':id', data);
+                    var deleteUrl = "{{ route('admin.users.destroy', ':id') }}".replace(':id', data);
+
+                    return '<a href="#" class="btn btn-primary edit-users-btn" data-id="' + data + '"><i class="fas fa-edit"></i></a>&nbsp;' +
+                        '<a href="' + editUrl + '" class="btn btn-primary view-users-btn"><i class="fas fa-eye"></i></a>&nbsp;' +
+                        '<form action="' + deleteUrl +
+                        '" method="post" style="display:inline">' +
+                        '@csrf' +
+                        '@method('DELETE')' +
+                        '<button type="submit" onclick="confirmDelete(event)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>' +
+                        '</form>';
+                }
+            }
+        ]
+    });
+});
+
+
+
 </script>

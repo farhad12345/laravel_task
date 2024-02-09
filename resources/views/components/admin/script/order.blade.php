@@ -5,7 +5,7 @@
     function GetOrders(page = 1, per_page = 10) {
             $.ajax({
                 url: '/api/get/orders/list?page=' + page + '&per_page=' + per_page,
-                type: "POST",
+                type: "get",
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
@@ -152,24 +152,27 @@
 
     // For Post Store
 
-        $(document).on('click', '.edit-post-btn', function (e) {
-        var company = $(this).data("lists");
+        $(document).on('click', '.edit-order-btn', function (e) {
+        var order = $(this).data("orders");
         $("#EditModal").modal("show");
-        $('#id').val(company.id);
-        $('#edit_company_name').val(company.name);
-        $('#edit_company_email').val(company.email);
-        $('#edit_country_code').val(company.country_id);
-        $('#edit_record_no').val(company.commercial_record_no);
-        var image = company.logo;
-        var source = "{!! asset('images/companies/') !!}" + '/' + image;
-        $('#edit_logo').attr('src', source);
+        $('#id').val(order.id);
+
+        $('#edit_company_id').val(order.company_id);
+        $('#edit_order_no').val(order.order_no);
+        $('#edit_city_from').val(order.city_from);
+        $('#edit_city_to').val(order.city_to);
+        $('#edit_price').val(order.price);
+
+        var image = order.order_images;
+        var source = "{!! asset('images/orders/') !!}" + '/' + image;
+        $('#edit_lmage').attr('src', source);
     });
 
-$(document).on('submit','#edit-company-form', function(e){
+$(document).on('submit','#update-order-form', function(e){
         e.preventDefault();
             const formData = new FormData(this);
                 $.ajax({
-                url: "/api/company/update",
+                url: "/api/order/update",
                 type: "post",
                 data: formData,
                 dataType: "JSON",
@@ -193,7 +196,7 @@ $(document).on('submit','#edit-company-form', function(e){
                         toastr.error('Failed', response["msg"]);
                     } else if (response["status"] == "success") {
                         toastr.success('Success', response["msg"])
-                        GetCompanies();
+                        GetOrders();
                         $(".fa-spin edit").css('display', 'none');
                         $("#EditModal").modal("hide");
                     }

@@ -41,24 +41,14 @@
     </li>
     @endcan
     @can('view users')
-        <li class="nav-item {{ request()->is('admin/users*') ? 'active show' : '' }}">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseusers"
-                aria-expanded="{{ request()->is('admin/users*') ? 'true' : 'false' }}" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-cog"></i>
-                <span>users</span>
-            </a>
-            <div id="collapseusers" class="collapse {{ request()->is('admin/users*') ? 'show' : '' }}"
-                aria-labelledby="headingusers" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Users:</h6>
-                    <a class="collapse-item {{ request()->is('admin/users/create') ? 'active ' : '' }}"
-                        href="{{ route('admin.users.create') }}">Create user</a>
-                    <a class="collapse-item {{ request()->is('admin/users') ? 'active' : '' }}"
-                        href="{{ route('admin.users.index') }}">View users</a>
-                </div>
-            </div>
-        </li>
-        @endcan
+    <li class="nav-item {{ request()->is('admin/users*') ? 'active show' : '' }}">
+        <a class="nav-link " href="{{route('admin.users.index')}}">
+            <i class="fas fa-user fa-cog"></i>
+            <span>users</span>
+        </a>
+    </li>
+    @endcan
+
     {{-- permission Tab --}}
     @can('view permission')
         <li

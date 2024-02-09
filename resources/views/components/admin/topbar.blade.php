@@ -60,10 +60,10 @@
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                     aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="{{ route('admin.profile') }}">
+                    {{-- <a class="dropdown-item" href="{{ route('admin.profile') }}">
                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                         Profile
-                    </a>
+                    </a> --}}
 
 
                     <div class="dropdown-divider"></div>

@@ -66,13 +66,14 @@
                     <div class="row">
                         <div class="mb-3 col-md-6">
                             <label class="form-label" for="company_name">Select Company</label>
-                            <select class="form-control " name="company_id" id="company_id">
+                            <select class="form-control " name="company_id" id="edit_company_id">
                                 <option selected disabled >Select Company</option>
                                 @foreach($compnies as $compnay)
                                 <option value="{{ $compnay->id }}">{{ $compnay->name }}</option>
                                 @endforeach
                             </select>
                         </div>
+                        <input type="text" name="id" hidden id="id">
                         <div class="mb-3 col-md-6">
                             <label class="form-label" for="company_email">Order Number</label>
                             <input type="text" class="form-control" name="order_no" id="edit_order_no" placeholder="Order Number" required>
@@ -91,7 +92,8 @@
                         </div>
                         <div class="mb-3 col-md-6">
                             <label class="form-label" for="company_email">Image</label>
-                            <input type="file" class="form-control" name="image" id="edit_image"  >
+                            <input type="file" class="form-control" name="image" id=""  >
+                            <img src="" id="edit_lmage" height="50px" width="45px">
                         </div>
                     </div>
                     <div class="modal-footer">

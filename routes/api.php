@@ -21,11 +21,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 //companies Apis
 Route::post('/add/company', [CompanyController::class,'SaveCompany']);
-Route::post('/get/companies/list', [CompanyController::class,'GetCompaniesList']);
+Route::get('/get/companies/list', [CompanyController::class,'GetCompaniesList']);
 Route::get('/company/delete/{id}', [CompanyController::class,'DeleteCompany']);
 Route::post('/company/update', [CompanyController::class,'UpdateCompany']);
 
+
+Route::get('/get/companies/data', [CompanyController::class,'GetCompaniesData']);
 //orders apis
-Route::post('/get/orders/list', [OrderController::class,'GetOrdersList']);
+Route::get('/get/orders/list', [OrderController::class,'GetOrdersList']);
 Route::post('/add/orders', [OrderController::class,'saveOrder']);
 Route::get('/order/delete/{id}', [OrderController::class,'DeleteOrder']);
+Route::post('/order/update', [OrderController::class,'UpdateOrder']);
+Route::get('/get/orders/data', [OrderController::class,'GetOrderData']);

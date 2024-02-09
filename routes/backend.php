@@ -49,7 +49,7 @@ Route::middleware(['auth.passport'])->prefix('admin')->name('admin.')->group(fun
     Route::post('roles_update', [RolesController::class, 'update'])->name('roles_update');
 
     //User Profile
-    Route::get('/profile', [UserController::class, 'ProfileView'])->name('profile');
+    Route::get('/profile', [UserController::class, 'index'])->name('profile');
     Route::post('/update-profile', [UserController::class, 'ProfileUpdate'])->name('update-profile');
     //   update-profile
 

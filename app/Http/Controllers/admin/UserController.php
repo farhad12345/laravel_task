@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\file;
 use Illuminate\Support\Facades\Storage;
@@ -20,7 +21,8 @@ class UserController extends Controller
     public function index()
     {
         $users = User::paginate(5);
-        return view('admin.users.index', ['users' => $users]);
+        $roles = Role::get();
+        return view('admin.users.index', ['users' => $users,'roles'=>$roles]);
     }
     public function getUsersData(Request $request)
     {
@@ -45,15 +47,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // if (Auth::user()->can('add user')) {
-        $users = new User;
-        $users->name = $request->name;
-        $users->email =  $request->email;
-        $posts->save();
-        return response()->json(['message' => 'User Created successful'], 200);
-        // } else {
-        //     return view('permission_denied');
-        // }
+        // Validate the request data...
+
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        // Assign a role (e.g., 'user') to the newly created user
+        $user->assignRole('user');
+
+        return response()->json(['message' => 'User created successfully'], 200);
     }
 
     /**

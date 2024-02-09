@@ -26,6 +26,22 @@
                                 Looks good!
                             </div>
                         </div>
+                        <div class="mb-12 col-12">
+                            <label class="form-label" for="validationCustom01">Password</label>
+                            <input type="password" name="password" placeholder="Password"  class="form-control" id="pass">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="mb-12 col-md-12">
+                            <label class="form-label" for="company_name">Select Role</label>
+                            <select class="form-control " name="role_id" id="role_id">
+                                <option selected disabled >Select Role</option>
+                                @foreach($roles as $role)
+                                <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         {{-- <br><br><br>
                         <div class="mb-12 col-12">
                             <label class="form-label" for="validationCustom01">Description</label>

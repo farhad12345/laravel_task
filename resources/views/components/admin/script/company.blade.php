@@ -4,7 +4,7 @@
     function GetCompanies(page = 1, per_page = 10) {
             $.ajax({
                 url: '/api/get/companies/list?page=' + page + '&per_page=' + per_page,
-                type: "POST",
+                type: "Get",
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
